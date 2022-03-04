@@ -26,7 +26,11 @@ public class PlayerActions : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, PickupDistance))
             {
-                
+                TriggerCore trig = hit.transform.GetComponent<TriggerCore>();
+                if (trig)
+                {
+                    trig.Trigger();
+                }
             }
         }
     }

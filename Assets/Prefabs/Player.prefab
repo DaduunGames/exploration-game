@@ -232,13 +232,16 @@ MonoBehaviour:
   MaxSpeed: 10
   SideStepSpeedModifier: 0.75
   BackStepSpeedModifier: 0.75
+  InertiaDampener: 10
+  SlideForce: 0.1
+  isSliding: 0
   Jumpspeed: 10
   MaxJumpTime: 0.3
   JumpDelay: 0.1
-  Gravity: 0.25
+  Gravity: 0.05
   CamMaxTilt: 90
   CamMinTilt: -80
-  InVehicle: 0
+  DisableInput: 0
   cam: {fileID: 6951092443167537087}
 --- !u!114 &8925744704720510344
 MonoBehaviour:
@@ -252,12 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcbd0826c2ba0d44a5bed3a5249818f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 7131389330816890488}
-  previewMat: {fileID: 2100000, guid: 9ea01bc6f361b904ab50bd87bbab2d85, type: 2}
-  previewMatNo: {fileID: 2100000, guid: e3bed492021ac9e4784e447749b8a057, type: 2}
   PickupDistance: 3
-  HandScale: 0.5
-  rotateSpeed: 100
 --- !u!54 &7781273776638309498
 Rigidbody:
   m_ObjectHideFlags: 0

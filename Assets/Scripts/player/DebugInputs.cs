@@ -19,5 +19,13 @@ public class DebugInputs : MonoBehaviour
         {
             GS.ClearSaveData();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            FindObjectOfType<Hotbar>().AddToInventory(ItemDB.ItemLibrary[(int)ItemDB.Items.woodenPlankSeed]);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            FindObjectOfType<Hotbar>().AddToInventory(ItemDB.ItemLibrary[(int)ItemDB.Items.stoneSeed]);
+        }
     }
 }

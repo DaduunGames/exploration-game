@@ -19,9 +19,17 @@ public static class GS
         WalkLeft = 1,
         WalkBackwards = 2,
         WalkRight = 3,
+
         Interact = 4,
         Jump = 5,
-        LeftClick = 6
+        LeftClick = 6,
+
+        Hotbar0 = 7,
+        Hotbar1 = 8,
+        Hotbar2 = 9,
+        Hotbar3 = 10,
+        Hotbar4 = 11,
+        Hotbar5 = 12,
     }
 
     public static List<KeyCode> DefaultControls = new List<KeyCode>()
@@ -30,9 +38,17 @@ public static class GS
         KeyCode.A,
         KeyCode.S,
         KeyCode.D,
+
         KeyCode.E,
         KeyCode.Space,
-        KeyCode.Mouse0
+        KeyCode.Mouse0,
+
+        KeyCode.Alpha1,
+        KeyCode.Alpha2,
+        KeyCode.Alpha3,
+        KeyCode.Alpha4,
+        KeyCode.Alpha5,
+        KeyCode.Alpha6
     };
 
     public static List<KeyCode> SecondaryDefaults = new List<KeyCode>()
@@ -41,7 +57,15 @@ public static class GS
         KeyCode.LeftArrow,
         KeyCode.DownArrow,
         KeyCode.RightArrow,
+
         KeyCode.F,
+        KeyCode.None,
+        KeyCode.None,
+
+        KeyCode.None,
+        KeyCode.None,
+        KeyCode.None,
+        KeyCode.None,
         KeyCode.None,
         KeyCode.None
     };
