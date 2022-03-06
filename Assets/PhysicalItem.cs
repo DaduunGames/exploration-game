@@ -10,11 +10,13 @@ public class PhysicalItem : TriggerCore
     public void Init(ItemConstructor Item)
     {
         ic = Item;
+        GameObject obj = Resources.Load<GameObject>(ic.physicalPrefab);
+        Instantiate(obj, transform.position, transform.rotation, transform);
     }
 
     public override void Trigger()
     {
-        FindObjectOfType<Hotbar>().AddToInventory(ic);
-        Destroy(gameObject);
+        bool freeSlot = FindObjectOfType<Hotbar>().AddToInventory(ic);
+        if(freeSlot) Destroy(gameObject);
     }
 }

@@ -10,6 +10,9 @@ public static class GS
     public static float MouseYSensativity = 1f;
     public static bool InvertPitch = false;
 
+    public static float InteractDist = 3f;
+
+    public static float GrappleDist = 20f;
 
     public enum Binds
     {
@@ -22,7 +25,7 @@ public static class GS
 
         Interact = 4,
         Jump = 5,
-        LeftClick = 6,
+        Fire = 6,
 
         Hotbar0 = 7,
         Hotbar1 = 8,
@@ -30,6 +33,8 @@ public static class GS
         Hotbar3 = 10,
         Hotbar4 = 11,
         Hotbar5 = 12,
+
+        DropItem = 13
     }
 
     public static List<KeyCode> DefaultControls = new List<KeyCode>()
@@ -48,7 +53,9 @@ public static class GS
         KeyCode.Alpha3,
         KeyCode.Alpha4,
         KeyCode.Alpha5,
-        KeyCode.Alpha6
+        KeyCode.Alpha6,
+
+        KeyCode.Q
     };
 
     public static List<KeyCode> SecondaryDefaults = new List<KeyCode>()
@@ -67,6 +74,8 @@ public static class GS
         KeyCode.None,
         KeyCode.None,
         KeyCode.None,
+        KeyCode.None,
+
         KeyCode.None
     };
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     Camera cam;
-    public float PickupDistance = 3;
     
 
 
@@ -24,7 +23,7 @@ public class PlayerActions : MonoBehaviour
             Vector3 point = new Vector3(0.5f, 0.5f, 0);
             Ray ray = cam.ViewportPointToRay(point);
 
-            if (Physics.Raycast(ray, out hit, PickupDistance))
+            if (Physics.Raycast(ray, out hit, GS.InteractDist))
             {
                 TriggerCore trig = hit.transform.GetComponent<TriggerCore>();
                 if (trig)

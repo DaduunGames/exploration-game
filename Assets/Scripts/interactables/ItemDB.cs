@@ -13,11 +13,13 @@ public static class ItemDB
 
     public static List<ItemConstructor> ItemLibrary = new List<ItemConstructor>()
     {
-        new ItemConstructor("Empty",ItemConstructor.ItemType.Seed, Crop.Type.Empty, 1, 999, 3),
-        new ItemConstructor("Stone Seed",ItemConstructor.ItemType.Seed, Crop.Type.Stone, 1, 999, 3),
-        new ItemConstructor("Wooden Plank Seed",ItemConstructor.ItemType.Seed, Crop.Type.WoodenPlank, 1, 999, 3),
+        new ItemConstructor("Empty","",999,"default","default","default",ItemConstructor.ItemType.Empty,Crop.Type.Empty),
 
-        new ItemConstructor("Grappling Hook", ItemConstructor.ItemType.Grapplehook, 0, 1, 1, 3)
+        new ItemConstructor("Stone Seed","Produces small cobblestones.",999,"stone","default","default",ItemConstructor.ItemType.Seed,Crop.Type.Stone),
+        new ItemConstructor("Wooden Plank Seed","Produces an unnaturally refined woodenplank.",999,"wooden_plank","default","default",ItemConstructor.ItemType.Seed,Crop.Type.WoodenPlank),
+
+        new ItemConstructor("Grappling Hook","Your new best friend",1,"default","default","grapplehook",ItemConstructor.ItemType.Grapplehook,Crop.Type.Empty)
+        
     };
 
     public static List<Crop> CropLibrary = new List<Crop>()
