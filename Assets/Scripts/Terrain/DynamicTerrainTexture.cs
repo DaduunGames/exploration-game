@@ -40,7 +40,7 @@ public class DynamicTerrainTexture : MonoBehaviour
     {
         print("Updating terrain textures");
 
-        float[,,] map = new float[terrain.terrainData.alphamapWidth, terrain.terrainData.alphamapHeight, 3];
+        float[,,] map = new float[terrain.terrainData.alphamapWidth, terrain.terrainData.alphamapHeight, 4];
 
         for (int y = 0; y < terrain.terrainData.alphamapWidth; y++)
         {

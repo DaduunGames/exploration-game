@@ -93,6 +93,8 @@ public class GrappleHookHand : MonoBehaviour
                     joint.spring = 4.5f;
                     joint.damper = 7f;
                     joint.massScale = 4.5f;
+
+                    Hook.transform.parent = hit.transform;
                 }
 
                 joint.minDistance = HookedDistance * 0.25f;
