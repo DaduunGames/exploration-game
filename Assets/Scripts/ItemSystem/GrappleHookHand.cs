@@ -19,27 +19,29 @@ public class GrappleHookHand : MonoBehaviour
 
     bool Firing = false;
     bool isHooked = false;
-    bool Returning = false;
+    
 
     public float HookSpeed = 10;
     public float PullForce = 5;
 
+    RaycastHit hit;
     private Vector3 hitPos;
 
     private float currentDistance;
 
     Camera cam;
+    PlayerMovementPhysicsBased pm;
 
     public float HookedDistance;
     bool creatJoint = false;
     SpringJoint joint;
-    CharacterController cc;
+   
 
 
     private void Start()
     {
         cam =FindObjectOfType<Camera>();
-        cc = FindObjectOfType<PlayerMovement>().GetComponent<CharacterController>();
+        pm = FindObjectOfType<PlayerMovementPhysicsBased>();
     }
 
     private void Update()
@@ -67,6 +69,8 @@ public class GrappleHookHand : MonoBehaviour
 
             Hook.transform.parent = Rope.transform;
             Hook.transform.rotation = Rope.transform.rotation;
+
+            
         }
 
         if (Firing)
@@ -82,24 +86,30 @@ public class GrappleHookHand : MonoBehaviour
 
                     HookedDistance = Vector3.Distance(hitPos, Rope.transform.position);
 
-                    joint = FindObjectOfType<PlayerMovement>().gameObject.AddComponent<SpringJoint>();
+                    joint = FindObjectOfType<PlayerMovementPhysicsBased>().gameObject.AddComponent<SpringJoint>();
                     joint.autoConfigureConnectedAnchor = false;
                     joint.connectedAnchor = hitPos;
 
                     joint.spring = 4.5f;
                     joint.damper = 7f;
                     joint.massScale = 4.5f;
-
-
-                    cc.enabled = false;
                 }
 
                 joint.minDistance = HookedDistance * 0.25f;
                 joint.maxDistance = HookedDistance * 0.8f;
 
-                if (Input.GetMouseButton(1))
+                if (Input.GetMouseButton(1))  //right clicking white hooked
                 {
                     HookedDistance -= PullForce * Time.deltaTime;
+
+                    if (hit.transform.GetComponent<Farmland>())
+                    {
+                        hit.transform.GetComponent<Farmland>().HarvestCrop();
+
+                        Firing = false;
+                        Hook.transform.parent = Rope.transform;
+                        Hook.transform.rotation = Rope.transform.rotation;
+                    }
                 }
 
             }
@@ -117,18 +127,14 @@ public class GrappleHookHand : MonoBehaviour
         {
             Hook.transform.localPosition = Vector3.MoveTowards(Hook.transform.localPosition, Vector3.zero, HookSpeed * 2 * Time.deltaTime);
             Destroy(joint);
-            cc.enabled = true;
+           
         }
-
-        
     }
         
 
     void StartGrappling()
     {
-       
-
-        RaycastHit hit;
+        
         Vector3 point = new Vector3(0.5f, 0.5f, 0);
         Ray ray = cam.ViewportPointToRay(point);
 
@@ -139,79 +145,22 @@ public class GrappleHookHand : MonoBehaviour
             if (hit.transform.gameObject.layer == 6)
             {
                 isHooked = true;
+                pm.IsHooked = true;
+
                 creatJoint = true;
             }
             else
             {
                 isHooked = false;
+                pm.IsHooked = false;
             }
             
         }
         else
         {
             isHooked = false;
+            pm.IsHooked = false;
             hitPos = Rope.transform.position + (Rope.transform.forward * GS.GrappleDist);
         }
     }
-
-
-    //private void Update()
-    //{
-
-    //    if (!HasFired && !Returning && (Input.GetKeyDown(GS.keybinds.Primary[(int)GS.Binds.Fire]) || Input.GetKeyDown(GS.keybinds.Secondary[(int)GS.Binds.Fire])))
-    //    {
-    //        HasFired = true;
-    //        Hook.transform.parent = null;
-    //    }
-    //    if (HasFired && (Input.GetKeyUp(GS.keybinds.Primary[(int)GS.Binds.Fire]) || Input.GetKeyDown(GS.keybinds.Secondary[(int)GS.Binds.Fire])))
-    //    {
-    //        Returning = true;
-    //    }
-
-    //    if (HasFired && !Returning && !isHooked)
-    //    {
-    //        Hook.transform.Translate(Vector3.forward * HookSpeed * Time.deltaTime);
-    //         currentDistance = Vector3.Distance(Hook.transform.position, Rope.transform.position);
-
-
-    //        if (currentDistance >= MaxDistance)
-    //        {
-    //            Returning = true;
-    //        }
-    //    }
-
-    //    if (Returning)
-    //    {
-    //        isHooked = false;
-
-    //        Hook.transform.parent = Rope.transform;
-    //        Hook.transform.rotation = Rope.transform.rotation;
-
-    //        Hook.transform.localPosition = Vector3.MoveTowards(Hook.transform.localPosition, Vector3.zero, HookSpeed * 2 * Time.deltaTime);
-    //        currentDistance = Vector3.Distance(Hook.transform.position, Rope.transform.position);
-
-    //        if (currentDistance <= 0.1f)
-    //        {
-    //            Returning = false;
-    //            HasFired = false;
-
-    //        }
-    //    }
-
-    //}
-
-
-    //public void Hooked(Collider col)
-    //{
-    //    print("hit something");
-    //    if (col.gameObject.layer == 6)
-    //    {
-    //        isHooked = true;
-    //    }
-    //    else
-    //    {
-    //        isHooked = false;
-    //        Returning = true;
-    //    }
-    //}
 }

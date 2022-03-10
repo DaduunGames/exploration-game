@@ -555,7 +555,7 @@ MonoBehaviour:
   Hook: {fileID: 6409923135368605144}
   Rope: {fileID: 1283326843290772525}
   HookSpeed: 40
-  PullForce: 5
+  PullForce: 10
   HookedDistance: 0
 --- !u!1 &6409923135368605144
 GameObject:
