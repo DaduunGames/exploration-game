@@ -18,7 +18,8 @@ public class GrappleHookHand : MonoBehaviour
     public LineRenderer Rope;
 
     bool Firing = false;
-    bool isHooked = false;
+    bool Hooking = false;
+    bool IsHooked = false;
     
 
     public float HookSpeed = 10;
@@ -35,6 +36,7 @@ public class GrappleHookHand : MonoBehaviour
     public float HookedDistance;
     bool creatJoint = false;
     SpringJoint joint;
+    SpringJoint joint2;
    
 
 
@@ -65,20 +67,24 @@ public class GrappleHookHand : MonoBehaviour
         }
         if (Firing && (Input.GetKeyUp(GS.keybinds.Primary[(int)GS.Binds.Fire]) || Input.GetKeyDown(GS.keybinds.Secondary[(int)GS.Binds.Fire])))
         {
-            Firing = false;
+            StopHooking();
 
-            Hook.transform.parent = Rope.transform;
-            Hook.transform.rotation = Rope.transform.rotation;
 
-            
         }
 
         if (Firing)
         {
-            Hook.transform.position = Vector3.MoveTowards(Hook.transform.position, hitPos, HookSpeed * Time.deltaTime);
+            if (!IsHooked)
+            {
+                Hook.transform.position = Vector3.MoveTowards(Hook.transform.position, hitPos, HookSpeed * Time.deltaTime);
+            }
             currentDistance = Vector3.Distance(Hook.transform.position, hitPos);
+            if (currentDistance <= 0.001f)
+            {
+                IsHooked = true;
+            }
 
-            if (isHooked)
+            if (Hooking)
             {
                 if (creatJoint)
                 {
@@ -87,18 +93,31 @@ public class GrappleHookHand : MonoBehaviour
                     HookedDistance = Vector3.Distance(hitPos, Rope.transform.position);
 
                     joint = FindObjectOfType<PlayerMovementPhysicsBased>().gameObject.AddComponent<SpringJoint>();
-                    joint.autoConfigureConnectedAnchor = false;
-                    joint.connectedAnchor = hitPos;
+
+                    if (hit.transform.GetComponent<Rigidbody>())
+                    {
+                        print("hit a rigidbody");
+                        joint.autoConfigureConnectedAnchor = false;
+                        joint.connectedBody = hit.transform.GetComponent<Rigidbody>();
+                        joint.connectedAnchor = Vector3.zero;
+                    }
+                    else
+                    {
+                        joint.autoConfigureConnectedAnchor = false;
+                        joint.connectedAnchor = hitPos;
+                    }
+                   
 
                     joint.spring = 4.5f;
                     joint.damper = 7f;
                     joint.massScale = 4.5f;
 
                     Hook.transform.parent = hit.transform;
+
                 }
 
-                joint.minDistance = HookedDistance * 0.25f;
-                joint.maxDistance = HookedDistance * 0.8f;
+                joint.minDistance = 0;
+                joint.maxDistance = HookedDistance;
 
                 if (Input.GetMouseButton(1))  //right clicking white hooked
                 {
@@ -108,21 +127,16 @@ public class GrappleHookHand : MonoBehaviour
                     {
                         hit.transform.GetComponent<Farmland>().HarvestCrop();
 
-                        Firing = false;
-                        Hook.transform.parent = Rope.transform;
-                        Hook.transform.rotation = Rope.transform.rotation;
+                        StopHooking();
                     }
                 }
 
             }
             
 
-            if (currentDistance <= 0.1f && !isHooked)
+            if (currentDistance <= 0.1f && !Hooking)
             {
-                Firing = false;
-
-                Hook.transform.parent = Rope.transform;
-                Hook.transform.rotation = Rope.transform.rotation;
+                StopHooking();
             }
         }
         else
@@ -133,6 +147,13 @@ public class GrappleHookHand : MonoBehaviour
         }
     }
         
+    void StopHooking()
+    {
+        Firing = false;
+        IsHooked = false;
+        Hook.transform.parent = Rope.transform;
+        Hook.transform.rotation = Rope.transform.rotation;
+    }
 
     void StartGrappling()
     {
@@ -146,21 +167,21 @@ public class GrappleHookHand : MonoBehaviour
 
             if (hit.transform.gameObject.layer == 6)
             {
-                isHooked = true;
+                Hooking = true;
                 pm.IsHooked = true;
 
                 creatJoint = true;
             }
             else
             {
-                isHooked = false;
+                Hooking = false;
                 pm.IsHooked = false;
             }
             
         }
         else
         {
-            isHooked = false;
+            Hooking = false;
             pm.IsHooked = false;
             hitPos = Rope.transform.position + (Rope.transform.forward * GS.GrappleDist);
         }

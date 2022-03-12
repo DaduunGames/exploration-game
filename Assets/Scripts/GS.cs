@@ -34,7 +34,8 @@ public static class GS
         Hotbar4 = 11,
         Hotbar5 = 12,
 
-        DropItem = 13
+        DropItem = 13,
+        Run = 14
     }
 
     public static List<KeyCode> DefaultControls = new List<KeyCode>()
@@ -55,7 +56,9 @@ public static class GS
         KeyCode.Alpha5,
         KeyCode.Alpha6,
 
-        KeyCode.Q
+        KeyCode.Q,
+
+        KeyCode.LeftShift
     };
 
     public static List<KeyCode> SecondaryDefaults = new List<KeyCode>()
@@ -74,6 +77,8 @@ public static class GS
         KeyCode.None,
         KeyCode.None,
         KeyCode.None,
+        KeyCode.None,
+
         KeyCode.None,
 
         KeyCode.None

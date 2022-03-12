@@ -6,12 +6,16 @@ public class PlayerMovementPhysicsBased : MonoBehaviour
 {
     [Header("Movement")]
     //basic speed variables
-    public float WalkSpeed = 1000f;
+    public float acceleration  = 3500f; //dont judge me
     Vector3 movement;
     public float InertiaDampener = 10;
     bool isMoving;
 
+    public float WalkSpeed = 10f;
+    public float RunSpeed = 15f;
+    public float AirSpeed = 15f;
 
+    bool IsRunning = false;
 
     [Header("Jumping")]
     // variables for jump logic
@@ -110,13 +114,23 @@ public class PlayerMovementPhysicsBased : MonoBehaviour
                 movement.x += 1;
                 isMoving = true;
             }
+
+            if (Input.GetKey(GS.keybinds.Primary[(int)GS.Binds.Run]) || Input.GetKey(GS.keybinds.Secondary[(int)GS.Binds.Run]))
+            {
+                IsRunning = true;
+            }
+            else
+            {
+                IsRunning = false;
+            }
+
         }
 
         
 
 
         movement.Normalize();
-        movement *= WalkSpeed * Time.deltaTime;
+        movement *= acceleration  * Time.deltaTime;
         movement = cam.transform.rotation * movement;
         movement.y = 0;
 
@@ -127,18 +141,36 @@ public class PlayerMovementPhysicsBased : MonoBehaviour
             isMoving = true;
         }
 
-        if (gd.IsGrounded && !isMoving)
-        {
-            rb.velocity = new Vector3(rb.velocity.x / InertiaDampener, rb.velocity.y, rb.velocity.z / InertiaDampener);
-        }
+
 
         if (isMoving)
         {
             rb.AddForce(movement);
         }
-       
-       
 
+
+
+        if (gd.IsGrounded) 
+        {
+            if (!isMoving)
+            {
+                rb.velocity = new Vector3(rb.velocity.x / InertiaDampener, rb.velocity.y, rb.velocity.z / InertiaDampener);
+            }
+
+            if (IsRunning)
+            {
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, RunSpeed);
+            }
+            else
+            {
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, WalkSpeed);
+            }
+            
+        }
+        else
+        {
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, AirSpeed);
+        }
 
     }
 }

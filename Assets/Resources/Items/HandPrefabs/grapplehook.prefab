@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2094205191921280454}
   - component: {fileID: 2094205191921280453}
   - component: {fileID: 2682463841997606656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: grapplehook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 7030412319444277059}
   - component: {fileID: 2518186328089710839}
   - component: {fileID: 7538740120245418617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 8586150454345333391}
   - component: {fileID: 1283326843290772525}
   - component: {fileID: 8427075339617143333}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,9 +8,11 @@ public class GroundDetector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer != 7)
+        
+        if (other.gameObject.layer != 7)
         {
             IsGrounded = true;
+            
         }
         else
         {
@@ -20,9 +22,8 @@ public class GroundDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.layer != 7)
-        {
-            IsGrounded = false;
-        }
+        
+        IsGrounded = false;
+        
     }
 }
