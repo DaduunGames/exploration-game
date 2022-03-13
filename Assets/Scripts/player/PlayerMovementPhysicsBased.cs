@@ -126,9 +126,6 @@ public class PlayerMovementPhysicsBased : MonoBehaviour
 
         }
 
-        
-
-
         movement.Normalize();
         movement *= acceleration  * Time.deltaTime;
         movement = cam.transform.rotation * movement;

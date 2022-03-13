@@ -12,10 +12,10 @@ public class GroundDetector : MonoBehaviour
         if (other.gameObject.layer != 7)
         {
             IsGrounded = true;
-            
         }
         else
         {
+            print(other.gameObject.name);
             IsGrounded = false;
         }
     }

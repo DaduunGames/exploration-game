@@ -37,8 +37,8 @@ public class GrappleHookHand : MonoBehaviour
     bool creatJoint = false;
     SpringJoint joint;
     SpringJoint joint2;
-   
 
+    public LayerMask layerMask;
 
     private void Start()
     {
@@ -94,29 +94,29 @@ public class GrappleHookHand : MonoBehaviour
 
                     joint = FindObjectOfType<PlayerMovementPhysicsBased>().gameObject.AddComponent<SpringJoint>();
 
+                    joint.autoConfigureConnectedAnchor = false;
                     if (hit.transform.GetComponent<Rigidbody>())
                     {
-                        print("hit a rigidbody");
-                        joint.autoConfigureConnectedAnchor = false;
                         joint.connectedBody = hit.transform.GetComponent<Rigidbody>();
-                        joint.connectedAnchor = Vector3.zero;
+                        joint.connectedAnchor = hit.transform.InverseTransformPoint(hitPos);
                     }
                     else
                     {
-                        joint.autoConfigureConnectedAnchor = false;
                         joint.connectedAnchor = hitPos;
                     }
-                   
 
-                    joint.spring = 4.5f;
-                    joint.damper = 7f;
+
+
+                    joint.spring = 100f; //4.5f;
+                    joint.damper = 70f;
                     joint.massScale = 4.5f;
+                    joint.enableCollision = true;
 
                     Hook.transform.parent = hit.transform;
 
                 }
 
-                joint.minDistance = 0;
+                joint.minDistance = 0.6f;
                 joint.maxDistance = HookedDistance;
 
                 if (Input.GetMouseButton(1))  //right clicking white hooked
@@ -161,7 +161,7 @@ public class GrappleHookHand : MonoBehaviour
         Vector3 point = new Vector3(0.5f, 0.5f, 0);
         Ray ray = cam.ViewportPointToRay(point);
 
-        if (Physics.Raycast(ray, out hit, GS.GrappleDist))
+        if (Physics.Raycast(ray, out hit, GS.GrappleDist, layerMask))
         {
             hitPos = hit.point;
 
