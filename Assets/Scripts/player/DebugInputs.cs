@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class DebugInputs : MonoBehaviour
 {
-    
+    public ItemDB.Items[] spawningItem;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             GS.SaveGame();
         }
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             GS.LoadGame(1);
         }
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.KeypadPeriod))
         {
             GS.ClearSaveData();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        if (Input.GetKeyDown(KeyCode.KeypadPlus)) 
         {
-            FindObjectOfType<Hotbar>().AddToInventory(ItemDB.ItemLibrary[(int)ItemDB.Items.woodenPlankSeed]);
+            foreach(ItemDB.Items item in spawningItem)
+            {
+                FindObjectOfType<Hotbar>().AddToInventory(ItemDB.ItemLibrary[(int)item]);
+            }
+            
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            FindObjectOfType<Hotbar>().AddToInventory(ItemDB.ItemLibrary[(int)ItemDB.Items.stoneSeed]);
-        }
+        
     }
 }

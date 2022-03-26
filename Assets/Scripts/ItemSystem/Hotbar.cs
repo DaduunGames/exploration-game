@@ -164,4 +164,54 @@ public class Hotbar : MonoBehaviour
         }
         
     }
+
+    public bool Checkfor(ItemAndAmount ia)
+    {
+        bool success = true;
+        foreach(Slot slot in slots)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                Item item = slot.transform.GetChild(0).GetComponent<Item>();
+
+                if (ItemDB.ItemLibrary[(int)ia.item].Name == item.Name)
+                {
+                    if (ia.amount <= item.amount)
+                    {
+                        print("Found enough of: " + ia.item);
+                        success = true;
+                        break;
+                    }
+                    else
+                    {
+                        success = false;
+                        print("Only found " + item.amount + "/" + ia.amount + " of: " + ia.item);
+                    }
+                }
+                else
+                {
+                    success = false;
+                    print("No " + ia.item + " found.");
+                }
+            }
+        }
+        return success;
+    }
+
+
+    public void RemoveFromInventory(ItemAndAmount ia)
+    {
+        foreach (Slot slot in slots)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                Item item = slot.transform.GetChild(0).GetComponent<Item>();
+
+                if (ItemDB.ItemLibrary[(int)ia.item].Name == item.Name)
+                {
+                    item.RemoveItem(ia.amount);
+                }
+            }
+        } 
+    }
 }

@@ -7,7 +7,8 @@ public class Farmland : MonoBehaviour
     Crop currentCrop;
     GameObject prefab = null;
 
-    public Crop.Type testCrop;
+    public Crop.Type WildCrop;
+    public bool isWild;
 
     private GameObject Physical;
     public Vector3 offset;
@@ -18,11 +19,19 @@ public class Farmland : MonoBehaviour
         currentCrop = new Crop();
 
         Physical = Resources.Load<GameObject>("Items/PhysicalItem");
+
+        if (isWild)
+        {
+            PlantCrop(ItemDB.NewCrop(WildCrop));
+        }
+
     }
 
 
     private void Update()
     {
+        
+
         if(currentCrop.type != Crop.Type.Empty)
         {
             GrowCrop();
@@ -74,7 +83,7 @@ public class Farmland : MonoBehaviour
             for (int i = 0; i < amount; i++)
             {
                 PhysicalItem temp = Instantiate(Physical, transform.position + offset, Quaternion.identity).GetComponent<PhysicalItem>();
-                temp.Init(ItemDB.ItemLibrary[currentCrop.itemIndex]) ;
+                temp.Init(ItemDB.ItemLibrary[(int)currentCrop.type]) ;
 
                 Vector3 force = new Vector3(
                     Random.Range(-0.5f, 0.5f),
@@ -87,7 +96,12 @@ public class Farmland : MonoBehaviour
 
         print("harveting crop");
 
-        RemoveCrop();    
+        RemoveCrop();
+
+        if (isWild)
+        {
+            PlantCrop(ItemDB.NewCrop(WildCrop));
+        }
     }
 
     public void RemoveCrop()

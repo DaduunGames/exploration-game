@@ -10,15 +10,29 @@ public class Crop
     public float growRate = 1f;
 
     public string prefab = "";
-    public string image = "";
+    //public string image = "";
 
-    public int itemIndex = 0;
+    //public int itemIndex = 0;
 
     public enum Type
     {
         Empty = 0,
         Stone = 1,
-        WoodenPlank = 2
+        WoodenPlank = 2,
+        Table = 3,
+        Chair = 4,
+        YarnBall = 5,
+        Cloth = 6,
+        Paper = 7,
+        Book = 8,
+        Torch = 9,
+        Metal = 10,
+        Coal = 11,
+        Rope = 12,
+        MagicalCircuit = 13,
+        RuinCobble = 14,
+        Cog = 15,
+        Ingot = 16
     }
 
     public Crop()
@@ -26,12 +40,12 @@ public class Crop
         type = Type.Empty;
     }
 
-    public Crop(Type CropType, float GrowRate, string Prefab, string Image, int ItemIndex)
+    public Crop(Type CropType, float GrowRate, string Prefab)
     {
         type = CropType;
         growRate = GrowRate;
         prefab = Prefab;
-        image = Image;
-        itemIndex = ItemIndex;
+        //image = Image;
+        //itemIndex = ItemIndex;
     }
 }

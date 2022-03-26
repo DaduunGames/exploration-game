@@ -495,7 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a135b869d601642977b2cd71c5bc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCrop: 0
+  WildCrop: 0
+  isWild: 1
   offset: {x: 0, y: 0.5, z: 0}
   HarvestFlingForce: 3
 --- !u!65 &2871110703033144052
@@ -509,5 +510,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.88960266, y: 0.05935663, z: 0.8896484}
-  m_Center: {x: -0.011305809, y: -0.04107663, z: -0.011267602}
+  m_Size: {x: 0.88960266, y: 0.12278837, z: 0.8896484}
+  m_Center: {x: -0.011305809, y: -0.00936076, z: -0.011267602}
