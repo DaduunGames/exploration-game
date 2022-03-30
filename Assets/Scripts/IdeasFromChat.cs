@@ -14,6 +14,7 @@ public class IdeasFromChat : MonoBehaviour
     (character arch, they realise they dont like being mean, so instead they become the helpers of the sea!)
     - house get repaired over the course of the game
     - hermit crab with broken/trash shell, help him over the course of the game. lil dude is shy, and you help him dev elop self-worth
+    - grafting system to create new plants by combining two or more plants together
 
 
 
