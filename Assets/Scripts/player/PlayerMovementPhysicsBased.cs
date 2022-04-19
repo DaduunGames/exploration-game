@@ -92,6 +92,7 @@ public class PlayerMovementPhysicsBased : MonoBehaviour
             {
                 movement.z += 1;
                 isMoving = true;
+            if (!gd.IsGrounded) movement.z -= 0.8f;
             }
 
             //Backward
@@ -99,21 +100,24 @@ public class PlayerMovementPhysicsBased : MonoBehaviour
             {
                 movement.z -= 1;
                 isMoving = true;
-            }
+            if (!gd.IsGrounded) movement.z += 0.8f;
+        }
 
             //left
             if (Input.GetKey(GS.keybinds.Primary[(int)GS.Binds.WalkLeft]) || Input.GetKey(GS.keybinds.Secondary[(int)GS.Binds.WalkLeft]))
             {
                 movement.x -= 1;
                 isMoving = true;
-            }
+            if (!gd.IsGrounded) movement.x += 0.8f;
+        }
 
             //right
             if (Input.GetKey(GS.keybinds.Primary[(int)GS.Binds.WalkRight]) || Input.GetKey(GS.keybinds.Secondary[(int)GS.Binds.WalkRight]))
             {
                 movement.x += 1;
                 isMoving = true;
-            }
+            if (!gd.IsGrounded) movement.x -= 0.8f;
+        }
 
             if (Input.GetKey(GS.keybinds.Primary[(int)GS.Binds.Run]) || Input.GetKey(GS.keybinds.Secondary[(int)GS.Binds.Run]))
             {
@@ -149,6 +153,8 @@ public class PlayerMovementPhysicsBased : MonoBehaviour
 
         if (gd.IsGrounded) 
         {
+            
+
             if (!isMoving)
             {
                 rb.velocity = new Vector3(rb.velocity.x / InertiaDampener, rb.velocity.y, rb.velocity.z / InertiaDampener);

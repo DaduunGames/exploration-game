@@ -23,7 +23,7 @@ public class Item : MonoBehaviour
 
         if (amount <= 0)
         {
-            Destroy(FindObjectOfType<Hotbar>().hand.transform.GetChild(0).gameObject);
+            //Destroy(FindObjectOfType<Hotbar>().hand.transform.GetChild(0).gameObject);
             Destroy(gameObject);
         }
     }

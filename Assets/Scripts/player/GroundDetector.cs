@@ -8,7 +8,11 @@ public class GroundDetector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        
+        if (Input.GetKey(KeyCode.KeypadMultiply))
+        {
+            print(other.name);
+        }
+
         if (other.gameObject.layer != 7)
         {
             IsGrounded = true;
@@ -22,7 +26,7 @@ public class GroundDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        
+        print("no longer triggereing: " + other.name);
         IsGrounded = false;
         
     }

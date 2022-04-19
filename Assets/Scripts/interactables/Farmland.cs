@@ -40,10 +40,10 @@ public class Farmland : MonoBehaviour
 
     public bool PlantCrop(Crop crop)
     {
-        print("attempting to plant");
+        //print("attempting to plant");
         if (currentCrop.type == Crop.Type.Empty)
         {
-            print("able to plant");
+            //print("able to plant");
             //set crop
             currentCrop = crop;
 
@@ -59,7 +59,7 @@ public class Farmland : MonoBehaviour
         }
         else
         {
-            print("Something is already planted");
+            //print("Something is already planted");
             return false;
         }
        

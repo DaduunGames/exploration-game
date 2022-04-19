@@ -27,28 +27,36 @@ public class BuildStation : TriggerCore
             {
                 success = false;
             }
-            else
-            {
-                hotbar.RemoveFromInventory(ia);
-            }
         }
 
         if (success)
         {
             UpgradeStructure();
+            
         }
 
     }
 
     void UpgradeStructure()
     {
-        foreach(StructureBase sb in Structures)
+        foreach (ItemAndAmount ia in Structures[currentStructure + 1].Cost)
+        {
+            hotbar.RemoveFromInventory(ia);
+        }
+
+
+        foreach (StructureBase sb in Structures)
         {
             sb.obj.SetActive(false);
         }
         
         ++currentStructure;
         Structures[currentStructure].obj.SetActive(true);
+
+        if (currentStructure >= Structures.Length - 1)
+        {
+            Destroy(gameObject);
+        }
 
         SetText();
     }

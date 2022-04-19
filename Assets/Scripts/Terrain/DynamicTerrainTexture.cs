@@ -41,7 +41,7 @@ public class DynamicTerrainTexture : MonoBehaviour
         print("Updating terrain textures");
 
         float[,,] map = new float[terrain.terrainData.alphamapWidth, terrain.terrainData.alphamapHeight, 4];
-
+       
         for (int y = 0; y < terrain.terrainData.alphamapWidth; y++)
         {
             for (int x = 0; x < terrain.terrainData.alphamapHeight; x++)
@@ -64,10 +64,14 @@ public class DynamicTerrainTexture : MonoBehaviour
                     //print(1 - height);
                 }
 
-                map[y, x, 0] = (float) (1- steepness) * height;
-                map[y, x, 1] = (float) (steepness) * height;
-                map[y, x, 2] = (float)1 - height;
+                float gravel = terrain.terrainData.GetAlphamapTexture(terrain.terrainData.alphamapTextureCount - 1).GetPixel(x, y).a;
+
+                map[y, x, 0] = (float) (1- steepness) * height - gravel;
+                map[y, x, 1] = (float) (steepness) * height - gravel;
+                map[y, x, 2] = (float) 1 - height - gravel;
+                map[y, x, 3] = (float)gravel;
                 
+
             }
         }
         terrain.terrainData.SetAlphamaps(0, 0, map);
