@@ -150,6 +150,7 @@ public class Hotbar : MonoBehaviour
 
                 case ItemConstructor.ItemType.Material:
                     //TODO: materials
+                    ItemObj.AddComponent<MaterialItem>();
                     break;
             }
 

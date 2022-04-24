@@ -16,23 +16,24 @@ public class Crop
 
     public enum Type
     {
-        Empty = 0,
-        Stone = 1,
-        WoodenPlank = 2,
-        Table = 3,
-        Chair = 4,
-        YarnBall = 5,
-        Cloth = 6,
-        Paper = 7,
-        Book = 8,
-        Torch = 9,
-        Metal = 10,
-        Coal = 11,
-        Rope = 12,
-        MagicalCircuit = 13,
-        RuinCobble = 14,
-        Cog = 15,
-        Ingot = 16
+        Empty,
+        Stone,
+        WoodenPlank,
+        Metal,
+        Table,
+        Chair,
+        YarnBall,
+        Cloth,
+        Paper,
+        Book,
+        Torch,
+        
+        Coal,
+        Rope,
+        MagicalCircuit,
+        RuinCobble,
+        Cog ,
+        Ingot
     }
 
     public Crop()

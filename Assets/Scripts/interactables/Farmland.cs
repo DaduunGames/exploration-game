@@ -16,7 +16,7 @@ public class Farmland : MonoBehaviour
 
     private void Start()
     {
-        currentCrop = new Crop();
+        currentCrop = ItemDB.NewCrop(Crop.Type.Empty);
 
         Physical = Resources.Load<GameObject>("Items/PhysicalItem");
 
@@ -79,11 +79,20 @@ public class Farmland : MonoBehaviour
     {
         if (currentCrop.age >= 1)
         {
-            int amount = Random.Range(1,3);
+            int amount = Random.Range(2,4);
             for (int i = 0; i < amount; i++)
             {
                 PhysicalItem temp = Instantiate(Physical, transform.position + offset, Quaternion.identity).GetComponent<PhysicalItem>();
-                temp.Init(ItemDB.ItemLibrary[(int)currentCrop.type]) ;
+
+                if(i < amount - 1)
+                {
+                    temp.Init(ItemDB.ItemLibrary[(int)currentCrop.type]);
+                }
+                else
+                {
+                    temp.Init(ItemDB.ItemLibrary[(int)currentCrop.type + ItemDB.CropLibrary.Count - 1]);
+                }
+                
 
                 Vector3 force = new Vector3(
                     Random.Range(-0.5f, 0.5f),

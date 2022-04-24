@@ -26,7 +26,7 @@ public class GroundDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        print("no longer triggereing: " + other.name);
+        //print("no longer triggereing: " + other.name);
         IsGrounded = false;
         
     }

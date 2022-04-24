@@ -13,11 +13,11 @@ public class PlayerResources : MonoBehaviour
 
     
 
-    private void Start()
+    private void Awake()
     {
         Debug.Log("world was reset");
-        GetResourceData();
-        LoadPos();
+        //GetResourceData();
+        //LoadPos();
     }
 
     private void GetResourceData()

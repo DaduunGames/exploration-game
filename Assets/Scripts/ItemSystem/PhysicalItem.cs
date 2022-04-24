@@ -5,7 +5,7 @@ using UnityEngine;
 public class PhysicalItem : TriggerCore
 {
 
-    public ItemConstructor ic = ItemDB.ItemLibrary[(int)ItemDB.Items.empty];
+    public ItemConstructor ic = ItemDB.ItemLibrary[0];
 
     public void Init(ItemConstructor Item)
     {
